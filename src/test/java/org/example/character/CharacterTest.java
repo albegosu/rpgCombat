@@ -36,7 +36,6 @@ public class CharacterTest {
         }
         @Test
         public void Character_can_die_when_Health_0(){
-            int initHealth = character.getHealth();
             int damage = 1001;
             character.dealDamage(damage);
             assertFalse(character.isAlive());
@@ -46,9 +45,45 @@ public class CharacterTest {
         @Test
         public void Character_can_Heal_only_if_isAlive(){
             character.dealDamage(900);
-            character.heal();
+            character.healDamage();
 
             assertTrue(character.isAlive());
             assertEquals(1000, character.getHealth());
+        }
+    //ITERATION TWO
+        // I 2.1
+        @Test
+        public void Character_cannot_attack_itself(){
+            int initHealth = character.getHealth();
+            character.attack(character, 50);
+            assertEquals(1000, initHealth);
+        }
+        // I 2.2
+        @Test
+        public void Character_only_Heal_itself(){
+            Character victim = new Character();
+            character.attack(victim,100);
+            character.heal(victim);
+
+            assertEquals(1000, character.getHealth());
+        }
+        // I 2.3
+        @Test
+        public void Character_Damage_reduce_50percent_target_is_5_Levels_above(){
+            Character victim = new Character();
+            // Victim 5 or more level above
+            victim.setLevel(8);
+            character.attack(victim, 100);
+
+            assertEquals(950, victim.getHealth());
+        }
+        @Test
+        public void Character_Damage_increased_50percent_target_is_5_Levels_below(){
+            Character victim = new Character();
+            // Atacante 5 or more level above
+            character.setLevel(8);
+            character.attack(victim, 100);
+
+            assertEquals(850, victim.getHealth());
         }
 }

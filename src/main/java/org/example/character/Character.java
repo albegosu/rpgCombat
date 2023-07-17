@@ -16,6 +16,9 @@ public class Character {
     public boolean isAlive() {
         return alive;
     }
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
     public int getDamage() {
         return damage;
@@ -27,10 +30,25 @@ public class Character {
             health = 0;
         }
     }
-    public void heal() {
+    public void healDamage() {
         if (isAlive()) {
             health = 1000;
         }
     }
-
+    public void attack(Character victim, int damage){
+        if (victim != this){
+            int modifyDamage = damage;
+            if(victim.getLevel() >= (this.level + 5)){
+                modifyDamage = (int) (damage * 0.5);
+            }else if (victim.getLevel() <= (this.level -5)){
+                modifyDamage = (int) (damage * 1.5);
+            }
+            victim.dealDamage(modifyDamage);
+        }
+    }
+    public void heal(Character healer){
+        if (healer != this){
+            healer.healDamage();
+        }
+    }
 }
