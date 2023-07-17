@@ -65,11 +65,11 @@ public class CharacterTest {
             character.attack(victim,100);
             character.heal(victim);
 
-            assertEquals(1000, character.getHealth());
+            assertEquals(900, victim.getHealth());
         }
         // I 2.3
         @Test
-        public void Character_Damage_reduce_50percent_target_is_5_Levels_above(){
+        public void Character_Damage_reduce_50_percent_if_Target_is_5_Levels_above(){
             Character victim = new Character();
             // Victim 5 or more level above
             victim.setLevel(8);
@@ -78,7 +78,7 @@ public class CharacterTest {
             assertEquals(950, victim.getHealth());
         }
         @Test
-        public void Character_Damage_increased_50percent_target_is_5_Levels_below(){
+        public void Character_Damage_increased_50_percent_it_target_is_5_Levels_below(){
             Character victim = new Character();
             // Atacante 5 or more level above
             character.setLevel(8);
@@ -86,4 +86,7 @@ public class CharacterTest {
 
             assertEquals(850, victim.getHealth());
         }
+    //ITERATION THREE
+        // I 3.1
+
 }
