@@ -37,16 +37,18 @@ public class Character {
         }
     }
     //ITERATION TWO
-    public void attack(Character victim, int damage){
+    public void attack(Character victim, int damage, int distance){
 
         if (victim != this){
-            int modifyDamage = damage;
-            if(victim.getLevel() >= (this.level + 5)){
-                modifyDamage = (int) (damage * 0.5);
-            }else if (victim.getLevel() <= (this.level -5)){
-                modifyDamage = (int) (damage * 1.5);
+            if (distance < victim.getRange()) {
+                int modifyDamage = damage;
+                if (victim.getLevel() >= (this.level + 5)) {
+                    modifyDamage = (int) (damage * 0.5);
+                } else if (victim.getLevel() <= (this.level - 5)) {
+                    modifyDamage = (int) (damage * 1.5);
+                }
+                victim.dealDamage(modifyDamage);
             }
-            victim.dealDamage(modifyDamage);
         }
     }
     public void heal(Character victim){
